@@ -1,3 +1,4 @@
+import os
 
 from django.shortcuts import render
 from django.http import JsonResponse
@@ -8,7 +9,8 @@ from PIL import Image
 from rummy_django.models.models import Player, clean_database
 from rummy_django.serializers import UserSerializer
 from rummy_django.testing.test_image import process_image
-
+from dotenv import load_dotenv
+load_dotenv()
 
 @api_view(['GET'])
 def index(request):
@@ -24,7 +26,6 @@ def get_users(request):
 
 @api_view(['POST'])
 def add_user(request):
-    print("request", request.data)
 
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
@@ -50,11 +51,10 @@ def upload_image(request):
     file = request.FILES['image']
     if file.name == '':
         return JsonResponse({"error": "No image selected"}, status=400)
-    print("username", user_name)
     try:
 
         image = Image.open(file).convert("RGB")
-        points = process_image(image)
+        points = process_image(image,os.getenv('MODEL_PATH'))
         user = Player.objects.filter(name=user_name).first()
         if user:
             user.points += points

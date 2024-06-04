@@ -6,7 +6,6 @@ const serverUrl = `http://${serverIp}:${serverPort}`;
 function addUser() {
     const name= document.getElementById('nameInput').value;
     const points=0
-    console.log("hello")
     fetch(`${serverUrl}/add_user/`, {
         method: 'POST',
         headers: {
@@ -16,14 +15,12 @@ function addUser() {
     })
         .then(response => response.json())
         .then(data => {
-            console.log('Success:', data);
             document.cookie = "name=" + name;
             renderUsers();
         })
 }
 function renderUsers() {
 
-    console.log("rendering users")
     const pointsContainer = document.getElementById('pointsContainer');
     pointsContainer.textContent = '';
     const usersContainer = document.getElementById('usersContainer');
@@ -33,10 +30,8 @@ function renderUsers() {
     fetch(`${serverUrl}/users/`)
         .then(response => response.json())
         .then(data => {
-            console.log('users:', data);
 
             data.forEach(user => {
-                console.log(user)
                 const userElement = document.createElement('div');
                 userElement.textContent = user.name + ' - ' + user.points;
                 usersContainer.appendChild(userElement);
@@ -46,14 +41,11 @@ function renderUsers() {
 }
 
 function uploadImage() {
-    console.log("hello")
     const input = document.getElementById('fileInput');
     if (input.files && input.files[0]) {
         const formData = new FormData();
         formData.append('image', input.files[0]);
-        console.log(document.cookie)
         const name = nameFromCookie();
-        console.log(name)
         formData.append('name',  name);
 
         const uploadedImage = document.getElementById('uploadedImage');
@@ -72,7 +64,6 @@ function uploadImage() {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 if (data.error) {
                     alert('Error: ' + data.error);
                 } else {
@@ -100,7 +91,6 @@ function newGame() {
     })
         .then(response => response.json())
         .then(data => {
-            console.log('Success:', data);
             renderUsers();
         })
 }

@@ -63,7 +63,7 @@ def test_image(image_path):
     # draw_prediction(image, prediction[0], confidence_threshold=0.3).show()
     plot_sample(image, prediction, confidence_threshold=0.75)
 
-def process_image(image):
+def process_image(image,checkpoint_full_path):
 
     threshold = 0.75
 
@@ -83,16 +83,12 @@ def process_image(image):
         # v2.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
     ])
     image = transform(image)
-    checkpoint_full_path = 'rummy_django/testing/models/checkpoint_epoch_30.pth'
     checkpoint = torch.load(checkpoint_full_path, map_location=torch.device('cpu'))
     model.load_state_dict(checkpoint['state_dict'])
     input_tensor = image.unsqueeze(0)
     with torch.no_grad():
         prediction = model(input_tensor)
 
-    #print(prediction)
-    points=predictions_to_points(prediction, threshold=threshold)
-    # draw_prediction(image, prediction[0], confidence_threshold=0.3).show()
     true_points=plot_sample(image, prediction, confidence_threshold=threshold)
     return true_points
 

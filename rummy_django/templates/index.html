@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Image</title>
+</head>
+<body>
+<button onclick="newGame()">New Game</button>
+<h1>Upload Image</h1>
+<input type="file" accept="image/*" capture="user" id="fileInput">
+<button onclick="uploadImage()">Upload</button>
+
+<input type="text" id="nameInput" placeholder="Enter username">
+<div id="usersContainer"></div>
+<button onclick="addUser()">Add User</button>
+
+<img id="uploadedImage" src="" alt="Uploaded Image" style="display:none; width: 300px; height: auto;"/>
+<p id="pointsContainer"></p>
+
+<script src="{% static 'point_tracker.js' %}"></script>
+</body>
+</html>

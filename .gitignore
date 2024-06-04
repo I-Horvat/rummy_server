@@ -1,6 +1,6 @@
 images
 .idea
-models
+*.pth
 __pycache__
 *.jpeg
 .env

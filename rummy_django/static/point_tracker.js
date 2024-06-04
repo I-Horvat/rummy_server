@@ -1,5 +1,8 @@
+require('dotenv').config();
+const serverIp= process.env.SERVER_IP;
+const serverPort= process.env.SERVER_PORT;
+const serverUrl = `http://${serverIp}:${serverPort}`;
 
-const serverUrl = 'http://192.168.1.202:8000/';
 function addUser() {
     const name= document.getElementById('nameInput').value;
     const points=0
@@ -89,7 +92,12 @@ function uploadImage() {
 }
 
 function newGame() {
-    fetch(`${serverUrl}/new_game/`)
+    fetch(`${serverUrl}/new_game/`,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);

@@ -17,14 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from rummy_django.views import get_users, add_user, upload_image, index
+from rummy_django.views import get_users, add_user, upload_image, index, new_game
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('users/', get_users, name='get_users'),
     path('add_user/', add_user, name='add_user'),
     path('upload/', upload_image, name='upload_image'),
-    path('new_game/', index, name='new_game'),
+    path('new_game/', new_game, name='new_game'),
     path('', index, name='index'),
 
 

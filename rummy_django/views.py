@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from PIL import Image
 
-from rummy_django.models.models import Player, reset_points, clean_database
+from rummy_django.models.models import Player, clean_database
 from rummy_django.serializers import UserSerializer
 from rummy_django.testing.test_image import process_image
 

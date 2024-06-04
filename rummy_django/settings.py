@@ -1,16 +1,16 @@
 import os
 from pathlib import Path
-
+from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+load_dotenv()
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-+*al#u7=c3k779)gx=5-*@4257zifj5l0z+_yt7*x=yk28ekz4"
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG")
 
 ALLOWED_HOSTS = ["*"]
 
@@ -66,12 +66,12 @@ WSGI_APPLICATION = "rummy_django.wsgi.application"
 
 DATABASES = {
     "default": {
-        "PASSWORD": "bazepodataka",
-        "HOST": "localhost",
-        "PORT": "5434",
+        "PASSWORD": os.getenv("DATABASE_PASSWORD"),
+        "HOST": os.getenv("DATABASE_HOST"),
+        "PORT": os.getenv("DATABASE_PORT"),
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "rummy_counter",
-        "USER": "postgres",
+        "NAME": os.getenv("DATABASE_NAME"),
+        "USER": os.getenv("DATABASE_USER"),
     }
 }
 

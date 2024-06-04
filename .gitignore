@@ -3,3 +3,7 @@ images
 models
 __pycache__
 *.jpeg
+.env
+node_modules
+package-lock.json
+package.json

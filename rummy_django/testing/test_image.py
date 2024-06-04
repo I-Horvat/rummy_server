@@ -94,7 +94,6 @@ def process_image(image):
     points=predictions_to_points(prediction, threshold=threshold)
     # draw_prediction(image, prediction[0], confidence_threshold=0.3).show()
     true_points=plot_sample(image, prediction, confidence_threshold=threshold)
-    #get labels of card over threshold, summ the points recieved
     return true_points
 
 def predictions_to_points(predictions, threshold=0.5):
